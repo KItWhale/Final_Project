@@ -1,10 +1,5 @@
-var mat = require("./Matrix.js");
-var matrix = mat(100, 100);
-
-
 var ParentClass = require("./ParentClass.js");
 module.exports = class Auto extends ParentClass{
-
     getNewCoordinates() {
         this.directions = [
             [this.x - 2, this.y - 2],
@@ -39,12 +34,12 @@ module.exports = class Auto extends ParentClass{
         return super.chooseCell(character);
     }
 
-    move() {
+    move(matrix) {
         var emptyCells = this.chooseCell(0);
-        var newCell = random(emptyCells);
+        var newCell = this.random(emptyCells);
 
         var grasses = this.chooseCell(1);
-        var grass = random(grasses);
+        var grass = this.random(grasses);
 
         if (newCell) {
 
@@ -64,16 +59,16 @@ module.exports = class Auto extends ParentClass{
 
         }
     }
-    exterminate() {
+    exterminate(matrix, grassEaterArr, predatorArr, snailArr) {
 
         var grassEaters = this.chooseCell(2);
-        var grassEater = random(grassEaters);
+        var grassEater = this.random(grassEaters);
 
         var predators = this.chooseCell(3);
-        var predator = random(predators);
+        var predator = this.random(predators);
 
         var snails = this.chooseCell(5);
-        var snail = random(snails);
+        var snail = this.random(snails);
 
         if (grassEater) {
 
@@ -118,7 +113,7 @@ module.exports = class Auto extends ParentClass{
             }
         }
         else {
-            this.move();
+            this.move(matrix);
         }
     }
 }

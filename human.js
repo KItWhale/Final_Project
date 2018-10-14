@@ -1,6 +1,5 @@
 var ParentClass = require("./ParentClass.js");
-var mat = require("./Matrix.js");
-var matrix = mat(100, 100);
+var Musor = require("./musor.js");
 
 module.exports = class Human extends ParentClass{
     constructor(x, y, index) {
@@ -13,12 +12,12 @@ module.exports = class Human extends ParentClass{
         super.getNewCoordinates();
         return super.chooseCell(character);
     }
-    move() {
+    move(matrix, humanArr, musorArr) {
         var emptyCells = this.chooseCell(0);
-        var newCell = random(emptyCells);
+        var newCell = this.random(emptyCells);
 
         var grasses = this.chooseCell(1);
-        var grass = random(grasses);
+        var grass = this.random(grasses);
 
         if (newCell) {
 
@@ -40,7 +39,7 @@ module.exports = class Human extends ParentClass{
 
             this.energy--;
             if (this.energy <= 0) {
-                this.die();
+                this.die(matrix, humanArr);
             }
 
 
@@ -63,17 +62,17 @@ module.exports = class Human extends ParentClass{
 
             this.energy--;
             if (this.energy <= 0) {
-                this.die();
+                this.die(matrix, humanArr);
             }
         }
 
     }
-    exterminate() {
+    exterminate(matrix, humanArr, predatorArr, musorArr, grassEaterArr) {
         var grassEaters = this.chooseCell(2);
-        var grassEater = random(grassEaters);
+        var grassEater = this.random(grassEaters);
 
         var predators = this.chooseCell(3);
-        var predator = random(predators);
+        var predator = this.random(predators);
 
 
         if (grassEater) {
@@ -124,10 +123,10 @@ module.exports = class Human extends ParentClass{
             }
         }
         else {
-            this.move();
+            this.move(matrix, humanArr, musorArr);
         }
     }
-    die() {
+    die(matrix, humanArr) {
         matrix[this.y][this.x] = 0;
         for (var i in humanArr) {
             if (this.x == humanArr[i].x && this.y == humanArr[i].y) {

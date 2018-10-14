@@ -1,6 +1,8 @@
 var ParentClass = require("./ParentClass.js");
-var mat = require("./Matrix.js");
-var matrix = mat(100, 100);
+var Matrix = require("./Matrix.js");
+var myMatrix = new Matrix(100,100);
+var matrix = myMatrix.mat(); 
+var Slime = require("./slime.js");
 
 module.exports = class Snail extends ParentClass{
 
@@ -8,12 +10,12 @@ module.exports = class Snail extends ParentClass{
         super.getNewCoordinates();
         return super.chooseCell(character);
     }
-    move(){
+    move(matrix, slimeArr){
         var emptyCells = this.chooseCell(0);
-        var newCell = random(emptyCells);
+        var newCell = this.random(emptyCells);
         
         var grasses = this.chooseCell(1);
-        var grass = random(grasses);
+        var grass = this.random(grasses);
 
         if(newCell){
 

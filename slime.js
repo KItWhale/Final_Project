@@ -1,6 +1,7 @@
 var ParentClass = require("./ParentClass.js");
-var mat = require("./Matrix.js");
-var matrix = mat(100, 100);
+var Matrix = require("./Matrix.js");
+var myMatrix = new Matrix(100,100);
+var matrix = myMatrix.mat(); 
 
 module.exports = class Slime{
 	constructor(x,y,index){
@@ -9,7 +10,7 @@ module.exports = class Slime{
 		this.index=index;
 		this.energy=35;
 	}
-	die(){
+	die(matrix, slimeArr){
 		this.energy--;
 		if(this.energy<=0){
 			matrix[this.y][this.x]=0;

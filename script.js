@@ -10,34 +10,7 @@ var musorArr = [];
 
 
 
-for (y = 0; y < matrix.length; y++) {
-    for (x = 0; x < matrix[y].length; x++) {
-        if (matrix[y][x] == 1) {
-            var gr = new Grass(x, y, 1);
-            grassArr.push(gr);
-        }
-        else if (matrix[y][x] == 2) {
-            var gre = new GrassEater(x, y, 2);
-            grassEaterArr.push(gre);
-        }
-        else if (matrix[y][x] == 3) {
-            var pre = new Predator(x, y, 3);
-            predatorArr.push(pre);
-        }
-        else if (matrix[y][x] == 4) {
-            var hum = new Human(x, y, 4);
-            humanArr.push(hum);
-        }
-        else if (matrix[y][x] == 5) {
-            var sna = new Snail(x, y, 5);
-            snailArr.push(sna);
-        }
-        else if (matrix[y][x] == 7) {
-            var auto = new Auto(x, y, 7);
-            autoArr.push(auto);
-        }
-    }
-}
+
 
 setInterval(function(){ 
     for (y = 0; y < matrix.length; y++) {

@@ -1,5 +1,6 @@
-var mat = require("./Matrix.js");
-var matrix = mat(100, 100);
+var Matrix = require("./Matrix.js");
+var myMatrix = new Matrix(100,100);
+var matrix = myMatrix.mat(); 
 
 module.exports = class ParentClass {
     constructor(x, y, index) {
@@ -47,4 +48,8 @@ module.exports = class ParentClass {
         return found;
     }
 
+    random(Arr){
+        var Item = Arr[Math.floor(Math.random() * Arr.length)];
+        return Item;
+    }
 }

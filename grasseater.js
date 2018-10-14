@@ -1,6 +1,4 @@
 var ParentClass = require("./ParentClass.js");
-var mat = require("./Matrix.js");
-var matrix = mat(100, 100);
 
 module.exports = class GrassEater extends ParentClass{
     constructor(x,y,index) {
@@ -13,9 +11,9 @@ module.exports = class GrassEater extends ParentClass{
         return super.chooseCell(character);
     }
 
-    move(){
+    move(matrix, grassEaterArr){
         var emptyCells = this.chooseCell(0);
-        var newCell = random(emptyCells);
+        var newCell = this.random(emptyCells);
         
         if(newCell){
 
@@ -27,16 +25,16 @@ module.exports = class GrassEater extends ParentClass{
 
             this.energy--;
             if(this.energy<=0){
-                this.die();
+                this.die(matrix, grassEaterArr);
             }
 
         }
         
     }
 
-    eat(){
+    eat(matrix, grassEaterArr, grassArr){
         var grasses = this.chooseCell(1);
-        var grass = random(grasses);
+        var grass = this.random(grasses);
         
         if(grass){
 
@@ -54,19 +52,19 @@ module.exports = class GrassEater extends ParentClass{
 
             this.energy++;
             if(this.energy>=10){
-                this.mul();
+                this.mul(matrix, grassEaterArr);
             }
             
 
         }
         else{
-            this.move();
+            this.move(matrix, grassEaterArr);
         }
     }
 
-    mul(){
+    mul(matrix, grassEaterArr){
         var emptyCells = this.chooseCell(0);
-        var newCell = random(emptyCells);
+        var newCell = this.random(emptyCells);
         
         if(newCell){
             matrix[newCell[1]][newCell[0]] = 2;
@@ -77,7 +75,7 @@ module.exports = class GrassEater extends ParentClass{
 
     }
 
-    die(){
+    die(matrix, grassEaterArr){
         matrix[this.y][this.x]=0;
         for (var i in grassEaterArr) {
                 if (this.x == grassEaterArr[i].x && this.y == grassEaterArr[i].y) {
